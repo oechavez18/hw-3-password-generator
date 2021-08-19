@@ -13,6 +13,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+function generatePassword(){
+  if (){
+    ;
+  }
+}
 
 // Function for random generator
 function getRandomLower(){
