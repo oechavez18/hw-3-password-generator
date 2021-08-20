@@ -13,31 +13,45 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+//Intial Arrays
+var getRandomLower=[];
+var getRandomUpper=[];
+var getRandomNumber=[]
+var getRandomCharacter=[];
 
-// Function for random generator
-function getRandomLower(){
-  return String.fromCharCode(Math.floor(Math.random() * 26)+97);
+//getRadomLower Array
+for( var i=97; i<123; i++){
+  var holder = String.fromCharCode(i);
+getRandomLower.push(holder);
 }
 
-function getRandomUpper(){
-  return String.fromCharCode(Math.floor(Math.random() * 26)+65);
+console.log(getRandomLower);
+
+//getRadomUpper Array
+for( var i=0; i<getRandomLower.length; i++)
+{
+  var holder = getRandomLower[i].toUpperCase();
+  getRandomUpper.push(holder);
+}
+console.log(getRandomUpper);
+
+//getRadnomNumber Array
+for( var i=48; i<58; i++){
+  var holder = String.fromCharCode(i);
+getRandomNumber.push(holder);
 }
 
-function getRandomNumber(){
-  return String.fromCharCode(Math.floor(Math.random() * 10)+48);
+console.log(getRandomNumber);
+
+//getRAndomCharacter Array
+for( var i=33; i<48; i++){
+  var holder = String.fromCharCode(i);
+getRandomCharacter.push(holder);
 }
 
-function getRandomCharacter(){
-  return String.fromCharCode(Math.floor(Math.random()*15 )+33);
-}
+console.log(getRandomCharacter);
 
-var randomGenerator= function(){
-   String.fromCharCode(Math.floor(Math.random() * 26)+97);
-   String.fromCharCode(Math.floor(Math.random() * 26)+65);
-   String.fromCharCode(Math.floor(Math.random() * 10)+48);
-   String.fromCharCode(Math.floor(Math.random()*15 )+33);
-};
-
+//prompt screen variables
 var passwordLength; 
 var confirmLower;
 var confirmUpper;
@@ -45,7 +59,7 @@ var confirmNumber;
 var confirmCharacter;
 var selectedCriteria;
 
-
+//generate password prompt screen
 function generatePassword(){
    passwordLength= prompt("Please choose the length of your password, between 8-128 characters long.");
    console.log("password length " + passwordLength);
@@ -76,6 +90,10 @@ function generatePassword(){
    else if (confirmLower && confirmUpper && confirmNumber && confirmCharacter)
 {
   selectedCriteria= randomGenerator() ;
-  
+  console.log(selectedCriteria);
 }
   }
+
+
+  for(var i=0; i<selectedCriteria.passwordLength; i++)
+  {;}
