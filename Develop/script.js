@@ -68,6 +68,12 @@ function generatePassword(){
   {
     alert("Invalid! Need to insert a number between 8-128.");
   }
+  // else if( typeof(passwordLength)!=Number)
+  // {
+  //   alert("Numbers only!");
+  //   console.log("inncorrect input for password length " + passwordLength);
+    
+  // }
   else if (passwordLength<8 || passwordLength>128)
    {
      passwordLength= alert("Password needs to be between 8-128 characters");
@@ -168,15 +174,19 @@ function generatePassword(){
     selectedCriteria= getRandomUpper.concat(getRandomNumber, getRandomCharacter);
      console.log(selectedCriteria);
   }
-}
 
-var password=[];
+  var generatedPassword=[];
 
 //For loop to generate random password
 for( var i=0; i<passwordLength; i++)
 {
-  var holder = selectedCriteria(Math.floor(Math.Random()*i));
-  password.push(holder);
-
+  var holder = selectedCriteria[Math.floor(Math.random()*selectedCriteria.length)];
+  generatedPassword.push(holder);
 }
-console.log(password);
+console.log(generatedPassword);
+
+password= generatedPassword.join('');
+return password;
+}
+
+
