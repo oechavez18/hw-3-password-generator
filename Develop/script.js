@@ -1,192 +1,162 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+  // Assignment Code
+  var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  // Write password to the #password input
+  function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+    passwordText.value = password;
 
-}
+  }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+  // Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
 
-//Intial Arrays
-var getRandomLower=[];
-var getRandomUpper=[];
-var getRandomNumber=[]
-var getRandomCharacter=[];
+  //Intial Arrays
+  var lowerArray=[];
+  var upperArray=[];
+  var numberArray=[]
+  var characterArray=[];
 
-//getRadomLower Array
-for( var i=97; i<123; i++){
-  var holder = String.fromCharCode(i);
-getRandomLower.push(holder);
-}
+  //create lower alphabet rray
+  for( var i=97; i<123; i++){
+    var holder = String.fromCharCode(i);
+  lowerArray.push(holder);
+  }
 
-//console.log(getRandomLower);
-
-//getRadomUpper Array
-for( var i=0; i<getRandomLower.length; i++)
-{
-  var holder = getRandomLower[i].toUpperCase();
-  getRandomUpper.push(holder);
-}
-//console.log(getRandomUpper);
-
-//getRadnomNumber Array
-for( var i=48; i<58; i++){
-  var holder = String.fromCharCode(i);
-getRandomNumber.push(holder);
-}
-
-//console.log(getRandomNumber);
-
-//getRAndomCharacter Array
-for( var i=33; i<48; i++){
-  var holder = String.fromCharCode(i);
-getRandomCharacter.push(holder);
-}
-
-//console.log(getRandomCharacter);
-
-//prompt screen variables
-var passwordLength; 
-var confirmLower;
-var confirmUpper;
-var confirmNumber;
-var confirmCharacter;
-var selectedCriteria=[];
-
-//generate password prompt screen
-function generatePassword(){
-   passwordLength= prompt("Please choose the length of your password, between 8-128 characters long.");
-   console.log("password length " + passwordLength);
-
-  if (!passwordLength)
+  //getRadomUpper Array
+  for( var i=0; i<lowerArray.length; i++)
   {
-    alert("Invalid! Need to insert a number between 8-128.");
+    var holder = lowerArray[i].toUpperCase();
+    upperArray.push(holder);
   }
-  // else if( typeof(passwordLength)!=Number)
-  // {
-  //   alert("Numbers only!");
-  //   console.log("inncorrect input for password length " + passwordLength);
+
+  //getRadnomNumber Array
+  for( var i=48; i<58; i++){
+    var holder = String.fromCharCode(i);
+  numberArray.push(holder);
+  }
+
+
+  //getRAndomCharacter Array
+  for( var i=33; i<48; i++){
+    var holder = String.fromCharCode(i);
+  characterArray.push(holder);
+  }
+
+  //prompt screen variables
+  var passwordLength; 
+  var confirmLower;
+  var confirmUpper;
+  var confirmNumber;
+  var confirmCharacter;
+  var selectedCriteria=[];
+
+  //generate password prompt screen
+  function generatePassword(){
+    passwordLength= prompt("Please choose the length of your password, between 8-128 characters long.");
+  //if user does not input a vlaule
+    if (!passwordLength)
+    {
+      alert("Invalid! Need to insert a number between 8-128.");
+      return;
+    }
+    //if user's value does not meet the range
+    else if (passwordLength<8 || passwordLength>128)
+    {
+      passwordLength= alert("Password needs to be between 8-128 characters");
+      return;
+    }
+  //prompt screen criteria 
+    else{
+      confirmLower= confirm("Will your password take lower-case letters?");
+      
+      confirmUpper= confirm("Will your password take upper-case letters?");
+      
+      confirmNumber= confirm("Will your password take numbers?");
     
-  // }
-  else if (passwordLength<8 || passwordLength>128)
-   {
-     passwordLength= alert("Password needs to be between 8-128 characters");
-     console.log("passwrod length " + passwordLength);
-   }
+      confirmCharacter= confirm("Will your password take special characters?");
+    }
+  // NO Criteria Selected
+    if(!confirmLower && !confirmUpper && !confirmNumber && !confirmCharacter)
+    { alert("A criteria needs to be picked!  Please pick a criteria." );}
+  //All criteria Selected
+    else if (confirmLower && confirmUpper && confirmNumber && confirmCharacter){
+      selectedCriteria= lowerArray.concat(upperArray, numberArray, characterArray);
+  }
+  //Character not selected
+    else if(confirmLower && confirmUpper && confirmNumber && !confirmCharacter){
+      selectedCriteria= lowerArray.concat(upperArray, numberArray);
+    }
+    //number and character not selected
+    else if(confirmLower && confirmUpper && !confirmNumber && !confirmCharacter){
+      selectedCriteria= lowerArray.concat(upperArray);
+    }
+    //Lower is only criteria slected
+    else if(confirmLower && !confirmUpper && !confirmNumber && !confirmCharacter){
+      selectedCriteria= lowerArray;
+    }
+    // upper and character not selected
+    else if(confirmLower && !confirmUpper && confirmNumber && !confirmCharacter){
+      selectedCriteria= lowerArray.concat(numberArray);
+    }
+  //Number not selected
+    else if(confirmLower && confirmUpper && !confirmNumber && confirmCharacter){
+      selectedCriteria= lowerArray.concat(upperArray,characterArray);
+    }
+    //Number and upper not selected
+    else if(confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
+      selectedCriteria= lowerArray.concat(characterArray);
+    }
+    //Upper not selected
+    else if(confirmLower && !confirmUpper && confirmNumber && confirmCharacter){
+      selectedCriteria= lowerArray.concat(numberArray,characterArray);
+    }
+    //Upper and number not selected
+    else if(confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
+      selectedCriteria= lowerArray.concat(characterArray);
+    }
+    //Upper only criteria selected
+    else if(!confirmLower && confirmUpper && !confirmNumber && !confirmCharacter){
+      selectedCriteria= upperArray;
+    }
+    //Number only criteria selected
+    else if(!confirmLower && !confirmUpper && confirmNumber && !confirmCharacter){
+      selectedCriteria= numberArray;
+    }
+    //Character only criteria selected
+    else if(!confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
+      selectedCriteria= characterArray;
+    }
+    //lower and character not selected
+    else if(!confirmLower && confirmUpper && confirmNumber && !confirmCharacter){
+      selectedCriteria= upperArray.concat(numberArray);
+    }
+  //lower and number not selected
+    else if(!confirmLower && confirmUpper && !confirmNumber && confirmCharacter){
+      selectedCriteria= upperArray.concat(characterArray);
+    }
+  //lower and upper not selected
+    else if(!confirmLower && !confirmUpper && confirmNumber && confirmCharacter){
+      selectedCriteria= numberArray.concat(characterArray);
+    }
+    //lower not selected
+    else if(!confirmLower && confirmUpper && confirmNumber && confirmCharacter){
+      selectedCriteria= upperArray.concat(numberArray, characterArray);
+    }
 
-   else{
-    confirmLower= confirm("Will your password take lower-case letters?");
-    console.log("Lower "+ confirmLower);
-    confirmUpper= confirm("Will your password take upper-case letters?");
-    console.log("Upper "+ confirmUpper);
-    confirmNumber= confirm("Will your password take numbers?");
-    console.log("Number "+ confirmNumber);
-    confirmCharacter= confirm("Will your password take special characters?");
-    console.log("Character "+ confirmCharacter);
-   }
-// NO Criteria Selected
-   if(!confirmLower && !confirmUpper && !confirmNumber && !confirmCharacter)
-   { alert("A criteria needs to be picked!  Please pick a criteria." );}
-   //All criteria Selected
-   else if (confirmLower && confirmUpper && confirmNumber && confirmCharacter){
-     selectedCriteria= getRandomLower.concat(getRandomUpper, getRandomNumber, getRandomCharacter);
-     console.log(selectedCriteria);
-}
-//Character not selected
-  else if(confirmLower && confirmUpper && confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomUpper, getRandomNumber);
-     console.log(selectedCriteria);
-  }
-  //number and character not selected
-  else if(confirmLower && confirmUpper && !confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomUpper);
-     console.log(selectedCriteria);
-  }
-  //Lower is only criteria slected
-  else if(confirmLower && !confirmUpper && !confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomLower;
-     console.log(selectedCriteria);
-  }
-  // upper and character not selected
-  else if(confirmLower && !confirmUpper && confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomNumber);
-     console.log(selectedCriteria);
-  }
-//Number not selected
-  else if(confirmLower && confirmUpper && !confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomUpper,getRandomCharacter);
-     console.log(selectedCriteria);
-  }
-  //Number and upper not selected
-  else if(confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomCharacter);
-     console.log(selectedCriteria);
-  }
-  //Upper not selected
-  else if(confirmLower && !confirmUpper && confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomNumber,getRandomCharacter);
-     console.log(selectedCriteria);
-  }
-  //Upper and number not selected
-  else if(confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomLower.concat(getRandomCharacter);
-     console.log(selectedCriteria);
-     
-  }
-  //Upper only criteria selected
-  else if(!confirmLower && confirmUpper && !confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomUpper;
-     console.log(selectedCriteria);
-  }
-  //Number only criteria selected
-  else if(!confirmLower && !confirmUpper && confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomNumber;
-     console.log(selectedCriteria);
-  }
-  //Character only criteria selected
-  else if(!confirmLower && !confirmUpper && !confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomCharacter;
-     console.log(selectedCriteria);
-  }
-  //lower and character not selected
-  else if(!confirmLower && confirmUpper && confirmNumber && !confirmCharacter){
-    selectedCriteria= getRandomUpper.concat(getRandomNumber);
-     console.log(selectedCriteria);
-  }
-//lower and number not selected
-  else if(!confirmLower && confirmUpper && !confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomUpper.concat(getRandomCharacter);
-     console.log(selectedCriteria);
-  }
-//lower and upper not selected
-  else if(!confirmLower && !confirmUpper && confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomNumber.concat(getRandomCharacter);
-     console.log(selectedCriteria);
-  }
-  //lower not selected
-  else if(!confirmLower && confirmUpper && confirmNumber && confirmCharacter){
-    selectedCriteria= getRandomUpper.concat(getRandomNumber, getRandomCharacter);
-     console.log(selectedCriteria);
+    var generatedPassword=[];
+
+  //For loop to generate random password
+  for( var i=0; i<passwordLength; i++)
+  {
+    var holder = selectedCriteria[Math.floor(Math.random()*selectedCriteria.length)];
+    generatedPassword.push(holder);
   }
 
-  var generatedPassword=[];
-
-//For loop to generate random password
-for( var i=0; i<passwordLength; i++)
-{
-  var holder = selectedCriteria[Math.floor(Math.random()*selectedCriteria.length)];
-  generatedPassword.push(holder);
-}
-console.log(generatedPassword);
-
-password= generatedPassword.join('');
-return password;
-}
+  password= generatedPassword.join('');
+  return password;
+  }
 
 
