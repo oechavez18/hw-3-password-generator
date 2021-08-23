@@ -14,44 +14,44 @@
   generateBtn.addEventListener("click", writePassword);
 
   //Intial Arrays
-  var lowerArray=[];
-  var upperArray=[];
-  var numberArray=[]
-  var characterArray=[];
+  const lowerArray=[];
+  const upperArray=[];
+  const numberArray=[]
+  const characterArray=[];
 
   //create lower alphabet rray
-  for( var i=97; i<123; i++){
-    var holder = String.fromCharCode(i);
+  for( let i=97; i<123; i++){
+    const holder = String.fromCharCode(i);
   lowerArray.push(holder);
   }
 
   //getRadomUpper Array
-  for( var i=0; i<lowerArray.length; i++)
+  for( let i=0; i<lowerArray.length; i++)
   {
-    var holder = lowerArray[i].toUpperCase();
+    const holder = lowerArray[i].toUpperCase();
     upperArray.push(holder);
   }
 
   //getRadnomNumber Array
-  for( var i=48; i<58; i++){
-    var holder = String.fromCharCode(i);
+  for( let i=48; i<58; i++){
+    const holder = String.fromCharCode(i);
   numberArray.push(holder);
   }
 
 
   //getRAndomCharacter Array
-  for( var i=33; i<48; i++){
-    var holder = String.fromCharCode(i);
+  for( let i=33; i<48; i++){
+    const holder = String.fromCharCode(i);
   characterArray.push(holder);
   }
 
   //prompt screen variables
-  var passwordLength; 
-  var confirmLower;
-  var confirmUpper;
-  var confirmNumber;
-  var confirmCharacter;
-  var selectedCriteria=[];
+  let passwordLength; 
+  let confirmLower;
+  let confirmUpper;
+  let confirmNumber;
+  let confirmCharacter;
+  let selectedCriteria=[];
 
   //generate password prompt screen
   function generatePassword(){
@@ -146,12 +146,12 @@
       selectedCriteria= upperArray.concat(numberArray, characterArray);
     }
 
-    var generatedPassword=[];
+    let generatedPassword=[];
 
   //For loop to generate random password
-  for( var i=0; i<passwordLength; i++)
+  for( let i=0; i<passwordLength; i++)
   {
-    var holder = selectedCriteria[Math.floor(Math.random()*selectedCriteria.length)];
+    const holder = selectedCriteria[Math.floor(Math.random()*selectedCriteria.length)];
     generatedPassword.push(holder);
   }
 
